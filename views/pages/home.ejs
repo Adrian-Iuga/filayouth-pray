@@ -112,9 +112,15 @@
                 <p class="section-subtitle">Dorești să ne rugăm pentru tine?</p>
                 <p class="section-subtitle">Adaugă cauza ta mai jos</p>
                 <div class="row">
-                    <div class="col-lg-12" style="color: black">
+                    <div class="col-lg-12 d-block" style="color: black">
                         <input id="cause" type="text" placeholder="Cauza ta" style="min-width: 250px;">
-                        <button type="button" onclick="addCause()"> Adaugă </button>
+                        <select id="causeCategory" style="min-width: 250px;" class="mt-3">
+                                <option value="type" disabled selected>Tipul cauzei</option>
+                                <option value="Personala">Personala</option>
+                                <option value="Spirituala">Spirituala</option>
+                                <option value="Fizică">Fizică</option>
+                        </select>
+                        <button type="button" onclick="addCause()" class="d-block mx-auto mt-3"> Adaugă </button>
                         
                         <p id="responseMessage" class="mt-5"></p>
                     </div>
@@ -137,17 +143,28 @@
 
                 async function postCause() {
                     const cause = document.getElementById('cause').value;
+                    const causeCategory = document.getElementById('causeCategory').value;
+                    
+                    if (causeCategory === "type") {
+                        document.getElementById('responseMessage').innerText = "Tipul cauzei nu a fost selectat!";
+                        document.getElementById('responseMessage').style.color = 'red';
+                        return;
+                    }
+                    
                     const response = await fetch('/add-text', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
                       },
-                      body: JSON.stringify({ cause }), // Send text as JSON
+                      body: JSON.stringify({ cause, causeCategory }), // Send text as JSON
                     });
             
                     const message = await response.text();
                     document.getElementById('responseMessage').innerText = message;
+                    document.getElementById('responseMessage').style.color = 'green';
+
                     document.getElementById('cause').value = '';
+                    document.getElementById('causeCategory').value = 'type';
                 }
 
                 async function fetchCauses() {
@@ -160,7 +177,7 @@
                     populateCauses(causes)
                 }
 
-                function populateCauses(causes) {
+                async function populateCauses(causes) {
                     const causesList = document.getElementById('causes');
 
                     if (causes && causes.length === 0) {

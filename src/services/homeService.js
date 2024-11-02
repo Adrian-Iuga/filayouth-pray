@@ -22,10 +22,10 @@ const getAll = async () => {
 
 const addCause = async (req, res, next) => {
     const filePath = path.join(__dirname, '../data/cause.txt');
-    const cause = req.body.cause + '\n';
+    const causeLine = req.body.causeCategory + ' | ' + req.body.cause + '\n';    
   
     // Append the new line to "example.txt"
-    fs.appendFile(filePath, cause, (err) => {
+    fs.appendFile(filePath, causeLine, (err) => {
       if (err) {
         console.error('Error writing to file:', err);
         res.status(500).send('Failed to write to file');
@@ -46,7 +46,7 @@ const getCauses = async (req, res, next) => {
         }
 
         // Split the file content into an array of causes
-        const causes = data.split('\n').filter(line => line.trim() !== ''); // Filter to remove empty lines
+        const causes = data.split('\n').filter(line => line.trim() !== '').sort();; // Filter to remove empty lines
         
         res.json(causes); // Send the causes as a JSON response
     });

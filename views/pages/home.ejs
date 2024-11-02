@@ -97,7 +97,7 @@
                 <hr class="lines wow zoomIn" data-wow-delay="0.3s">
             </div>
 
-            <div id="causes" class="d-block mx-auto text-left w-100"></div>
+            <div id="causes" class="d-block mx-auto text-left w-100" style="max-width: 600px;"></div>
         </div>
     </section>
     <!-- Services Section End -->
@@ -166,9 +166,10 @@
                     causesList.innerHTML = ''; // Clear any existing content
 
                     // Iterate over the causes array
-                    causes.forEach(cause => {
+                    causes.forEach((cause, index) => {
                         const li = document.createElement('li'); // Create a new list item
                         li.textContent = cause; // Set the text content to the cause
+                        li.classList.add('mb-3');
                         causesList.appendChild(li); // Append the list item to the causes list
                     });
                 }

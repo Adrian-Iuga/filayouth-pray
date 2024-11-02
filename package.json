@@ -9,21 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://adrianiuga@bitbucket.org/adrianiuga/volley-championship.git"
+    "url": "git+https://github.com/Adrian-Iuga/filayouth-pray"
   },
   "keywords": [
-    "volleyball",
-    "championship",
-    "app",
-    "fixtures",
-    "cup"
+    "prayer",
+    "pray",
+    "FilaYouth"
   ],
   "author": "Iuga Adrian-Valentin",
   "license": "ISC",
   "bugs": {
-    "url": "https://bitbucket.org/adrianiuga/volley-championship/issues"
+    "url": "https://github.com/Adrian-Iuga/filayouth-pray/issues"
   },
-  "homepage": "https://bitbucket.org/adrianiuga/volley-championship#readme",
+  "homepage": "https://github.com/Adrian-Iuga/filayouth-pray/issues#readme",
   "dependencies": {
     "@bitc/cnad": "^1.1.0",
     "axios": "^1.6.7",

@@ -126,164 +126,9 @@
                     </div>
                 </div>
             </div>
-
-            <script>
-                window.onload = fetchCauses;
-
-
-                async function addCause() {            
-                  try {
-                    postCause();
-                    fetchCauses();
-                  } catch (error) {
-                    console.error('Error:', error);
-                    document.getElementById('responseMessage').innerText = 'An error occurred';
-                  }
-                }
-
-                async function postCause() {
-                    const cause = document.getElementById('cause').value;
-                    const causeCategory = document.getElementById('causeCategory').value;
-                    
-                    if (causeCategory === "type") {
-                        document.getElementById('responseMessage').innerText = "Tipul cauzei nu a fost selectat!";
-                        document.getElementById('responseMessage').style.color = 'red';
-                        return;
-                    }
-                    
-                    const response = await fetch('/add-text', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({ cause, causeCategory }), // Send text as JSON
-                    });
-            
-                    const message = await response.text();
-                    document.getElementById('responseMessage').innerText = message;
-                    document.getElementById('responseMessage').style.color = 'green';
-
-                    document.getElementById('cause').value = '';
-                    document.getElementById('causeCategory').value = 'type';
-                }
-
-                async function fetchCauses() {
-                    const response = await fetch('/causes');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                    const causes = await response.json(); // Parse the JSON response
-
-                    populateCauses(causes)
-                }
-
-                async function populateCauses(causes) {
-                    const causesList = document.getElementById('causes');
-
-                    if (causes && causes.length === 0) {
-                        causesList.innerHTML = "Momentan nu este nici o cauză adăugată"; // Set the text content to the cause
-                        causesList.classList.add("text-center") = ''; // Clear any existing content                    
-                        causesList.classList.remove("text-left") = ''; // Clear any existing content   
-                    } else {
-                        causesList.innerHTML = ''; // Clear any existing content   
-                        causesList.classList.remove("text-center"); // Clear any existing content                    
-                        causesList.classList.add("text-left"); // Clear any existing content                    
-                    }
-
-                    // Iterate over the causes array
-                    causes.forEach((cause, index) => {
-                        const li = document.createElement('li'); // Create a new list item
-                        li.textContent = cause; // Set the text content to the cause
-                        li.classList.add('mb-3');
-                        causesList.appendChild(li); // Append the list item to the causes list
-                    });
-                }
-              </script>
         </div>
     </section>
     <!-- Features Section End -->
-
-    <!-- Blog Section -->
-    <section id="organizers" class="section">
-        <!-- Container Starts -->
-        <!-- <div class="container-fluid">
-            <div class="section-header">
-                <h2 class="section-title">Organizatori</h2>
-                <hr class="lines">
-                <div class="copyright pb-5">
-                    <p class="mt-5">Acest eveniment este organizat de către
-                        <span class="font-weight-bold">
-                            <a target="_blank" rel="nofollow"
-                                href="https://www.instagram.com/tinerifiladelfia">FilaYouth</a>
-                        </span>
-                        în parteneriat cu
-                        <span class="font-weight-bold">
-                            <a target="_blank" rel="nofollow"
-                                href="https://https://www.voceamartirilor.ro">Vocea Martirilor</a>
-                        </span>
-                    </p>
-                    <a href="https://www.voceamartirilor.ro" target="_blank">
-                        <img src="img/voice.jpg" alt="Vocea Martirilor România" style="width: 150px;">
-                    </a>
-                    <p class="section-subtitle">Urmărește-ne</p>
-                    <a href="https://www.facebook.com/printretinerifiladelfia" target="_blank">
-                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.instagram.com/tinerifiladelfia" target="_blank">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                    </a>
-                </div>
-
-                <h2 class="section-title mt-5">Sponsori</h2>
-                <hr class="lines">
-                <div class="copyright">
-                    <p class="mt-5">
-                        Mulțumim                          
-                        <span class="font-weight-bold">sponsorilor</span>
-                        care au făcut ca această competiție să fie posibilă!
-                    </p>
-                    <div class="sponsors-list row">
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://www.filadelfia.ro" target="_blank">
-                                <img src="img/sponsors/fila.png" alt="Filadelfia">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://pavistor.ro" target="_blank">
-                                <img src="img/sponsors/pavi.png" alt="Pavistor">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://www.annacori.com/ro/incaltaminte-si-genti-de-barbati-din-piele-naturala?fbclid=IwAR0Uo0AW5lwfcSL3dHWM0e0IR9wletIdgT8VxRG3OaLTsO5lQ6ozI6uk1Ak" target="_blank">
-                                <img src="img/sponsors/denis_2.jpg" alt="Denis">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://www.annacori.com/ro" target="_blank">
-                                <img src="img/sponsors/anna_cori_2.jpg" alt="Anna Cori">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://www.mesopotamia.ro" target="_blank">
-                                <img src="img/sponsors/Meso.png" alt="Mesopotamia">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-6">
-                            <a href="https://urspack.com" target="_blank">
-                                <img src="img/sponsors/UrsPack.png" alt="UrsPack">
-                            </a>
-                        </div>
-                        <div class="sponsor col-12 col-sm-12">
-                            <a href="https://www.progressoneledilizia.com" target="_blank">
-                                <img src="img/sponsors/Progresso.png" id="progresso-img" alt="Progresso Nel Edilizia">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </section>
-    <!-- blog Section End -->
 
     <!-- Footer Section Start -->
     <footer>
@@ -348,6 +193,7 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/waypoints.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/logic.js"></script>
 
 </body>
 

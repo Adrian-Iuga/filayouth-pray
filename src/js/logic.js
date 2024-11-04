@@ -53,8 +53,8 @@ async function populateCauses(causes) {
 
     if (causes && causes.length === 0) {
         causesList.innerHTML = "Momentan nu este nici o cauză adăugată"; // Set the text content to the cause
-        causesList.classList.add("text-center") = ''; // Clear any existing content                    
-        causesList.classList.remove("text-left") = ''; // Clear any existing content
+        causesList.classList.add("text-center"); // Clear any existing content                    
+        causesList.classList.remove("text-left"); // Clear any existing content
 
         return;
     } else {
